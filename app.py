@@ -1,15 +1,12 @@
 from flask import Flask, jsonify
 import mysql.connector
+from config import DB_CONFIG
 
 app = Flask(__name__)
 
 def get_database_link():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Mississippi21!",
-        database="horoscope_api"
-        )
+    return mysql.connector.connect(**DB_CONFIG)
+
 @app.route("/signs", methods=["GET"])
 def get_signs():
     db = get_database_link()
