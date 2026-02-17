@@ -28,11 +28,21 @@ It is just early days for now, but I want to be adding on lucky colours, compata
 This is the structure (but again, so far! Rome was not built in a day!)
 
     Horoscope_api/
-      database/
-        horoscope_setup.sql   # My horoscope 12 signs table
+        app/
+            __init__.py
+            routes/
+            services/
+            models/
+        database/
+            horoscope_setup.sql   # My horoscope 12 signs table
     venv/   # My virtual environment (not committed though, even though I did keep on accidentally putting folders inside my venv)
     requirements.txt   # Installed my Python packages - yay!
     README.md   # Got to keep that project tracked and documented!
+    app/
+  routes/
+  services/
+  models/
+
 
 Now, how's it going?
 Well, first things first, got to keep this project tracked! So, I have used the lovely *GitHub Project Board!*
