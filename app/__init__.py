@@ -14,6 +14,6 @@ def make_app():
 
     #Getting my blueprint routes to connect to my url path
     from app.routes.signs_routes import signs_bp
-    app.regisrer_blueprint(signs_bp)
+    app.register_blueprint(signs_bp)
 
     return app
