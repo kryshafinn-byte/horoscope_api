@@ -39,12 +39,12 @@ This is the structure (but again, so far! Rome was not built in a day!)
     requirements.txt   # Installed my Python packages - yay!
     README.md   # Got to keep that project tracked and documented!
     app/
-  routes/
-  services/
-  models/
+  
+## Blueprints Added (Session 2 Progress)
+I’ve now moved my /signs endpoint into its own Blueprint inside app/routes/signs_routes.py so that it can be clean and work well in the professional setting.
+The Flask app now can register this Blueprint inside that of app/__init__.py, which makes it so much nicer!
 
-
-Now, how's it going?
+# Now, how's it going?
 Well, first things first, got to keep this project tracked! So, I have used the lovely *GitHub Project Board!*
 Moving my tasks from To Do --> In Progress --> Done! Has been so satisfying!
 
