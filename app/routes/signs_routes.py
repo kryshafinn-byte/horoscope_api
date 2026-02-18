@@ -11,11 +11,45 @@ signs = Blueprint("signs", __name__)
 
 @signs.route("/", methods=["GET"])
 def home():
+    """
+    A warm and whimsical welcome to the Horoscope API. The stars have whispered to me to expect you!
+    ---
+    summary: Say hello to the API
+    description: >
+      Just a hello so you know the server is here, and ready to look up your star sign choices.
+    responses:
+      200:
+        description: The API is here and is politely waiting to help you discover your star sign!
+        examples:
+          application/json:
+            message: "Welcome to my Horoscopes API"
+    """
     return jsonify({"message": "Welcome to my Horoscopes API"})
+
 
 
 @signs.route("/signs", methods=["GET"])
 def get_signs():
+    """
+    Fetch the full lineup of zodiac signs — the whole starry-eyed bunch.
+    ---
+    summary: Get all zodiac signs
+    description: >
+      Returns every zodiac sign stored in the database. 
+      Great if you want to browse, compare, or teach yourself about them all equally.
+    responses:
+      200:
+        description: Successfully retrieved all signs
+        examples:
+          application/json:
+            - name: "Aries"
+              element: "Fire"
+              date_range: "March 21 - April 19"
+            - name: "Taurus"
+              element: "Earth"
+              date_range: "April 20 - May 20"
+    """
+
     db = current_app.get_db_connection()
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT * FROM signs")
@@ -41,12 +75,76 @@ def get_signs():
         if sign:
             signs.append(sign.as_json())
 
+    return jsonify(signs), 200
+
+
+@signs.route("/signs/by-date", methods=["GET"])
+def get_sign_by_date():
+    """
+    Figure out what zodiac sign your birthdate actually belongs to.
+    ---
+    summary: Reveal your zodiac sign (without needing to consult the stars yourself)
+    description: >
+      Pop in your birthdate and I'll travel to the stars to grab it. No moon charts, no
+      crystal balls — just clean logic and a bit of fun!
+    parameters:
+      - name: date
+        in: query
+        type: string
+        required: true
+        description: >
+          Your birthdate in the classic YYYY-MM-DD format. 
+          (If you send me anything else, the stars will complain.)
+        example: "1999-12-31"
+    responses:
+      200:
+        description: Your zodiac sign has been successfully identified
+        examples:
+          application/json:
+            name: "Leo"
+            element: "Fire"
+            date_range: "July 23 - August 22"
+      400:
+        description: >
+          Something went wrong — try again with a valid date in YYYY-MM-DD format.
+      404:
+        description: >
+          I tried, I really did, but your sign isn't in the stars, nor maybe this world. 
+            (Or maybe you were born on a day when the stars were not aligned!)
+    """
+
 @signs.route('/signs/<name>', methods=['GET'])
 def get_the_sign_name(name):
+    """
+    Look up a zodiac sign by name — because sometimes you just want to have a good nose around.
+    ---
+    summary: Get a specific zodiac sign
+    description: >
+      Type in the name of a zodiac sign and I'll fetch its details for you.
+    parameters:
+      - name: name
+        in: path
+        type: string
+        required: true
+        description: The name of the zodiac sign you want info on
+        example: "Leo"
+    responses:
+      200:
+        description: Found the sign you're looking for
+        examples:
+          application/json:
+            name: "Leo"
+            element: "Fire"
+            date_range: "July 23 - August 22"
+      404:
+        description: >
+          Could not find that sign. Either it doesn't exist or you typed it
+          in wrong.
+    """
     db = current_app.get_db_connection()
     cursor = db.cursor(dictionary=True)
     query = "SELECT * FROM signs WHERE LOWER(name) = LOWER(%s)"
-    cursor.execute(query,(name,))
+    cursor.execute(query, (name,))
     result = cursor.fetchone()
     cursor.close()
 
@@ -54,15 +152,13 @@ def get_the_sign_name(name):
         return jsonify(result), 200
     else:
         return jsonify({"error": "The stars have not crossed as your sign cannot be found!"}), 404
-
-@signs.route("/signs/by-date", methods=["GET"])
-def get_sign_by_date():
     birthdate = request.args.get("date")
     print("Birthdate received:", birthdate)
 
     if not birthdate:
         print("Error: No date has been provided for the stars to align with.")
         return jsonify({"error": "Missing date for the stars to align with!"}), 400
+
     try:
         date_obj = datetime.strptime(birthdate, "%Y-%m-%d")
         print("Date now locked in and created:", date_obj)
@@ -91,5 +187,3 @@ def get_sign_by_date():
     else:
         print("Error: Stars have been shot but your sign has not emerged from the cosmic database:", sign_name)
         return jsonify({"error": "Sign has flown too high and cannot be found..."}), 404
-
-    return jsonify(signs)
