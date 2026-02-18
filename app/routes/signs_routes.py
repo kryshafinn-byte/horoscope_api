@@ -38,4 +38,18 @@ def get_signs():
         if sign:
             signs.append(sign.as_json())
 
+@signs_bp.route('/signs/<name>', methods=['GET'])
+def get_the_sign_name(name):
+    db = current_app.get_db_connection()
+    cursor = db.cursor(dictionary=True)
+    query = "SELECT * FROM signs WHERE LOWER(name) = LOWER(%s)"
+    cursor.execute(query,(name,))
+    result = cursor.fetchone()
+    cursor.close()
+
+    if result:
+        return jsonify(result), 200
+    else:
+        return jsonify({"error": "The stars have not crossed as your sign cannot be found!"}), 404
+
     return jsonify(signs)
