@@ -112,6 +112,45 @@ def get_sign_by_date():
           I tried, I really did, but your sign isn't in the stars, nor maybe this world. 
             (Or maybe you were born on a day when the stars were not aligned!)
     """
+    from datetime import datetime
+    from flask import request, jsonify
+
+    date_str = request.args.get("date")
+
+    if not date_str:
+        return jsonify({"error": "Please provide a date in YYYY-MM-DD format"}), 400
+    try:
+        birthdate = datetime.strptime(date_str, "%Y-%m-%d")
+    except ValueError:
+        return jsonify({"error": "Invalid date format. Use YYYY-MM-DD"}), 400
+
+    month = birthdate.month
+    day = birthdate.day
+    zodiac_dates = [
+        ("Capricorn", (12, 22), (1, 19)),
+        ("Aquarius", (1, 20), (2, 18)),
+        ("Pisces", (2, 19), (3, 20)),
+        ("Aries", (3, 21), (4, 19)),
+        ("Taurus", (4, 20), (5, 20)),
+        ("Gemini", (5, 21), (6, 20)),
+        ("Cancer", (6, 21), (7, 22)),
+        ("Leo", (7, 23), (8, 22)),
+        ("Virgo", (8, 23), (9, 22)),
+        ("Libra", (9, 23), (10, 22)),
+        ("Scorpio", (10, 23), (11, 21)),
+        ("Sagittarius", (11, 22), (12, 21)),
+    ]
+
+    for sign, start, end in zodiac_dates:
+        start_month, start_day = start
+        end_month, end_day = end
+
+        if (month == start_month and day >= start_day) or \
+           (month == end_month and day <= end_day):
+            return jsonify({"sign": sign})
+
+    return jsonify({"error": "Could not determine zodiac sign"}), 500
+
 
 @signs.route('/signs/<name>', methods=['GET'])
 def get_the_sign_name(name):

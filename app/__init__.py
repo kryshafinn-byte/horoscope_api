@@ -4,6 +4,8 @@ import mysql.connector
 from flasgger import Swagger
 from app.routes.signs_routes import signs
 from app.routes.lucky_colour_routes import make_lucky_colours
+from app.routes.compatibility_routes import make_compatibility
+
 
 def make_app():
 
@@ -17,5 +19,6 @@ def make_app():
 
     app.register_blueprint(signs) #registering the blueprint
     make_lucky_colours(app)
+    make_compatibility(app)
 
     return app
