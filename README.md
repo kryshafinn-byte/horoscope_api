@@ -2,6 +2,11 @@
 
 This is my fun Horoscope API where users will be able to find out information about their own zodiacs (or someone else's). I have built this project using the four important ones! **Python, Flask, Flask‑RESTx, and MySQL.**
 
+## Project Overview
+
+This Horoscope API brings together Flask, MySQL, and Swagger to create a clean, beginner‑friendly, and actually fun little system. Everything is structured neatly using Blueprints, documented with Swagger UI. The whole thing runs smoothly, returns tidy JSON, and is easy to explore whether you're a developer or just curious about the stars and their stories.
+
+
 ## My Goal?
 
 My goal was first, to be dancing for joy to create something! But also to:
@@ -17,6 +22,8 @@ Currently, we have it that:
 
 - **12 zodiac signs** will show and return back to us  
 - Zodiac details show the **name**, **date range**, and if they are **Fire, Earth, Air, or Water!**
+- Fetch a specific sign
+- Work out a specific sign from birthdate
 
 ## 🛠 Where my Tech at?
 
