@@ -37,28 +37,26 @@ Currently, the API can:
 
 ## This is the structure (but again, so far! Rome was not built in a day!)
 
-horoscope_api/
-│
-├── app/
-│   ├── init.py
-│   ├── routes/
-│   │   ├── signs_routes.py
-│   │   ├── lucky_colour_routes.py
-│   │   └── compatibility_routes.py
-│   ├── models/
-│   │   ├── air_signs.py
-│   │   ├── base_sign.py
-│   │   ├── earth_signs.py
-│   │   ├── fire_signs.py
-│   │   └── water_signs.py
-│   └── database/
-│       └── horoscope_setup.sql
-│
-├── venv/  (not committed, even though I kept accidentally putting things inside it)
-├── requirements.txt
-├── app.py
-├── config.py
-└── README.md
+    horoscope_api/
+      app/
+        init.py
+        routes/
+          signs_routes.py
+          lucky_colour_routes.py
+          compatibility_routes.py
+        models/
+          air_signs.py
+          base_sign.py
+          earth_signs.py
+          fire_signs.py
+          water_signs.py
+    database/
+        horoscope_setup.sql
+    venv/  (not committed, even though I kept accidentally putting things inside it)
+    requirements.txt
+    app.py
+    config.py
+    README.md
 
 
 ## Completed
