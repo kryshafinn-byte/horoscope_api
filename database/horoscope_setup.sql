@@ -10,16 +10,17 @@ CREATE TABLE signs (
 
 CREATE TABLE lucky_colours (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    sign_id INT NOT NULL,
-    colour VARCHAR(50) NOT NULL,
-    FOREIGN KEY (sign_id) REFERENCES signs(id)
+    sign_name VARCHAR(50) NOT NULL,
+    colour1 VARCHAR(50) NOT NULL,
+    colour2 VARCHAR(50) NOT NULL,
+    colour3 VARCHAR(50) NOT NULL
 );
+
 
 CREATE TABLE compatibility (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    sign_id INT NOT NULL,
-    compatible_with VARCHAR(50) NOT NULL,
-    FOREIGN KEY (sign_id) REFERENCES signs(id)
+    sign_name VARCHAR(50) NOT NULL,
+    compatible_with VARCHAR(50) NOT NULL
 );
 
 INSERT INTO signs (name, date_range, element) VALUES
