@@ -1,86 +1,93 @@
 # Horoscope API
 
-This is my fun Horoscope API where users will be able to find out information about their own zodiacs (or someone else's). I have built this project using the four important ones! **Python, Flask, Flask‑RESTx, and MySQL.**
+This is my fun Horoscope API where users will be able to find out information about their own zodiacs (or someone else's). I have built this project using the four important ones: Python, Flask, Flask‑RESTx, and MySQL.
 
 ## Project Overview
 
-This Horoscope API brings together Flask, MySQL, and Swagger to create a clean, beginner‑friendly, and actually fun little system. Everything is structured neatly using Blueprints, documented with Swagger UI. The whole thing runs smoothly, returns tidy JSON, and is easy to explore whether you're a developer or just curious about the stars and their stories.
+This Horoscope API brings together Flask, MySQL, and Swagger to create a clean, beginner‑friendly, and actually fun little system. Everything is structured neatly using Blueprints and documented with Swagger UI. The whole thing runs smoothly, returns tidy JSON, and is easy to explore whether you're a developer or just curious about the stars and their stories.
 
+## My Goal
 
-## My Goal?
-
-My goal was first, to be dancing for joy to create something! But also to:
+My goal was first, to be dancing for joy to create something. But also to:
 
 - Build an API using Flask  
-- Structure a project in a professional and clear way, to get me career‑ready!  
-- Use Git + GitHub for being able to keep a good track of my project!  
-- Display my API using Flask‑RESTx (Swagger)  - Anybody else start thinking about the song by Cher Lloyd when they see this, or just me?
+- Structure a project in a professional and clear way, to get me career‑ready  
+- Use Git + GitHub to keep a good track of my project  
+- Display my API using Flask‑RESTx (Swagger)  
+  - (Anybody else start thinking about the song by Cher Lloyd when they see this, or just me)
 
 ## The Features
 
-Currently, we have it that:
+Currently, the API can:
 
-- **12 zodiac signs** will show and return back to us  
-- Zodiac details show the **name**, **date range**, and if they are **Fire, Earth, Air, or Water!**
-- Fetch a specific sign
-- Work out a specific sign from birthdate
+- Return all 12 zodiac signs  
+- Show zodiac details: name, date range, and element (Fire, Earth, Air, Water)  
+- Fetch a specific sign  
+- Work out a sign from a birthdate  
+- Return lucky colours for each sign (from MySQL)  
+- Check compatibility between two signs using elemental logic  
 
-## 🛠 Where my Tech at?
+## Where My Tech At
 
 - Python  
 - Flask  
-- Flask‑RESTx (for my Swagger UI)  
+- Flask‑RESTx (for Swagger UI)  
 - MySQL  
 - Git + GitHub  
 
 ## This is the structure (but again, so far! Rome was not built in a day!)
 
-Horoscope_api/
-app/
-    init.py
-routes/
-    signs_routes.py
-models/
-    air_signs.py
-    base_sign.py
-    earth_signs.py
-    fire_signs.py
-    water_signs.py
-database/
-horoscope_setup.sql   # My horoscope 12 signs table
-venv/   # My virtual environment (not committed though, even though I did keep on accidentally putting folders inside my venv)
-requirements.txt   # Installed my Python packages - yay!
-app.py
-config.py
-README.md   # Got to keep that project tracked and documented!
+horoscope_api/
+│
+├── app/
+│   ├── init.py
+│   ├── routes/
+│   │   ├── signs_routes.py
+│   │   ├── lucky_colour_routes.py
+│   │   └── compatibility_routes.py
+│   ├── models/
+│   │   ├── air_signs.py
+│   │   ├── base_sign.py
+│   │   ├── earth_signs.py
+│   │   ├── fire_signs.py
+│   │   └── water_signs.py
+│   └── database/
+│       └── horoscope_setup.sql
+│
+├── venv/  (not committed, even though I kept accidentally putting things inside it)
+├── requirements.txt
+├── app.py
+├── config.py
+└── README.md
 
-## Blueprints Added (Day 2)
 
-I’ve now moved my `/signs` endpoint into its own Blueprint inside  
-`app/routes/signs_routes.py` so that it can be clean and work well in the professional setting.
+## Completed
 
-The Flask app now can register this Blueprint inside `app/__init__.py`, which makes it so much nicer!
+These are the things I’ve already built and polished:
 
-I also added a **homepage route (`/`)** that returns a welcome message.
+- Added Blueprints and moved routes into their own files  
+- Added a homepage route  
+- Connected MySQL and returned real data  
+- Added lucky colours table and endpoint  
+- Added compatibility logic and endpoint  
+- Added Swagger documentation  
+- Added error handling  
+- Added birthdate → sign logic  
+- Structured routes using Blueprints  
+- Kept testing and refining  
 
-MySQL is now fully connected, and the `/signs` endpoint successfully returns data from the database.
+## Twiddly Bits Yet To Come
 
-## Now, how's it going?
+These are the things still on my list, waiting for their moment:
 
-Well, first things first, got to keep this project tracked!  
-So, I have used the lovely GitHub Project Board!  
-Moving my tasks from **To Do → In Progress → Done** has been so satisfying!
-
-## My future things and twiddly bits will be coming soon!
-
-- Add lucky colours table  
-- Add compatability table  
-- Add endpoints for each sign  
+- Add endpoints for each sign (detailed profiles)  
 - Add query parameters  
-- Get that SWAGGER documentation!  
-- Add in those error handling!  
-- Add unit tests (and keep on testing!)  
+- Add unit tests  
+- Add more fun descriptions  
+- Add a `/compatibility/all/<sign>` endpoint  
+- Possibly add a daily horoscope endpoint  
 
----
+## Thank You
 
-## 💫 Thank you, and I cannot wait for what is next!
+I cannot wait for what is next.
+
