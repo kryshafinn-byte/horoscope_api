@@ -1,7 +1,8 @@
-from app import create_app
+from app import make_app
+from app.routes.lucky_colour_routes import make_lucky_colours
 
-app = create_app()
+app = make_app()
+make_lucky_colours(app)
 
 if __name__ == "__main__":
     app.run(debug=True)
-    #DB Connectors have moved

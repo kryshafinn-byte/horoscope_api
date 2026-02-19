@@ -2,19 +2,18 @@ from flask import Flask
 from config import DB_CONFIG
 import mysql.connector
 from flasgger import Swagger
-from app.routes.signs_routes import signs   # renamed the blueprint to "signs" in signs_routes.py
-
+from app.routes.signs_routes import signs
 
 def make_app():
 
     app = Flask(__name__)
-    Swagger(app)  # Creating Swagger for API documentation
+    Swagger(app)
 
     def get_db_connection():
-        return mysql.connector.connect(**DB_CONFIG) #db connection
+        return mysql.connector.connect(**DB_CONFIG)
 
-    app.get_db_connection = get_db_connection #function to get db connection
+    app.get_db_connection = get_db_connection #getting the db connection
 
-    app.register_blueprint(signs) #register the blueprint with the app
+    app.register_blueprint(signs) #registering the blueprint
 
     return app
