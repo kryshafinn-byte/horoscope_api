@@ -4,8 +4,7 @@ from app.models.earth_signs import EarthSign
 from app.models.air_signs import AirSign
 from app.models.water_signs import WaterSign
 from datetime import datetime
-from app.utils.sign_calculator import get_sign_from_date
-
+from app.utils.sign_calculator import SignCalculator
 
 signs = Blueprint("signs", __name__)
 
@@ -25,7 +24,6 @@ def home():
             message: "Welcome to my Horoscopes API"
     """
     return jsonify({"message": "Welcome to my Horoscopes API"})
-
 
 
 @signs.route("/signs", methods=["GET"])
@@ -119,38 +117,19 @@ def get_sign_by_date():
 
     if not date_str:
         return jsonify({"error": "Please provide a date in YYYY-MM-DD format"}), 400
+@signs.route("/signs/by-date", methods=["GET"])
+def get_sign_by_date():
+    date_str = request.args.get("date")
+
+    if not date_str:
+        return jsonify({"error": "Please provide a date in YYYY-MM-DD format"}), 400
+
     try:
-        birthdate = datetime.strptime(date_str, "%Y-%m-%d")
-    except ValueError:
-        return jsonify({"error": "Invalid date format. Use YYYY-MM-DD"}), 400
+        sign = SignCalculator.from_string(date_str)
+    except ValueError as err:
+        return jsonify({"error": str(err)}), 400
 
-    month = birthdate.month
-    day = birthdate.day
-    zodiac_dates = [
-        ("Capricorn", (12, 22), (1, 19)),
-        ("Aquarius", (1, 20), (2, 18)),
-        ("Pisces", (2, 19), (3, 20)),
-        ("Aries", (3, 21), (4, 19)),
-        ("Taurus", (4, 20), (5, 20)),
-        ("Gemini", (5, 21), (6, 20)),
-        ("Cancer", (6, 21), (7, 22)),
-        ("Leo", (7, 23), (8, 22)),
-        ("Virgo", (8, 23), (9, 22)),
-        ("Libra", (9, 23), (10, 22)),
-        ("Scorpio", (10, 23), (11, 21)),
-        ("Sagittarius", (11, 22), (12, 21)),
-    ]
-
-    for sign, start, end in zodiac_dates:
-        start_month, start_day = start
-        end_month, end_day = end
-
-        if (month == start_month and day >= start_day) or \
-           (month == end_month and day <= end_day):
-            return jsonify({"sign": sign})
-
-    return jsonify({"error": "Could not determine zodiac sign"}), 500
-
+    return jsonify({"sign": sign}), 200
 
 @signs.route('/signs/<name>', methods=['GET'])
 def get_the_sign_name(name):
@@ -191,38 +170,3 @@ def get_the_sign_name(name):
         return jsonify(result), 200
     else:
         return jsonify({"error": "The stars have not crossed as your sign cannot be found!"}), 404
-    birthdate = request.args.get("date")
-    print("Birthdate received:", birthdate)
-
-    if not birthdate:
-        print("Error: No date has been provided for the stars to align with.")
-        return jsonify({"error": "Missing date for the stars to align with!"}), 400
-
-    try:
-        date_obj = datetime.strptime(birthdate, "%Y-%m-%d")
-        print("Date now locked in and created:", date_obj)
-    except ValueError:
-        print("Error: Seems that those dates are beyond this universe:", birthdate)
-        return jsonify({"error": "Uh oh! Seems that those dates are beyond this universe. Manifesting for you to use YYYY-MM-DD"}), 400
-
-    sign_name = get_sign_from_date(date_obj)
-    print("Sign returned by get_sign_from_date:", sign_name)
-
-    db = current_app.get_db_connection()
-    cursor = db.cursor(dictionary=True)
-    print("Double checking the stars for your sign:", sign_name)
-
-    cursor.execute("SELECT * FROM signs WHERE LOWER(name) = LOWER(%s)", (sign_name,))
-    result = cursor.fetchone()
-
-    cursor.close()
-    db.close()
-
-    print("The stars have your results:", result)
-
-    if result:
-        print("Shooting stars! Your sign has emerged from the cosmic database:", result)
-        return jsonify(result), 200
-    else:
-        print("Error: Stars have been shot but your sign has not emerged from the cosmic database:", sign_name)
-        return jsonify({"error": "Sign has flown too high and cannot be found..."}), 404
