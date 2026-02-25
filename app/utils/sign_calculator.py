@@ -3,7 +3,6 @@ from datetime import datetime
 class SignCalculator:
     """
     A class to calculate zodiac signs from the birthdates.
-    This class is a simple wrapper around my original code, but it keeps the code looking clean and makes it easier to test.
     """
 
     @staticmethod
@@ -21,7 +20,8 @@ class SignCalculator:
     @staticmethod
     def from_date(date_obj: datetime) -> str:
         """
-        Created a class for ease of reading and looking clean. The method takes a datetime object and returns the zodiac sign as a string.
+        The class takes a datetime object and returns the zodiac sign
+        as a string.
         """
         print("Seeing what sign your birthdate belongs to:", date_obj)
         month = date_obj.month
