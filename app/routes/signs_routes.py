@@ -134,30 +134,9 @@ def get_sign_by_date():
 @signs.route('/signs/<name>', methods=['GET'])
 def get_the_sign_name(name):
     """
-    Look up a zodiac sign by name — because sometimes you just want to have a good nose around.
-    ---
-    summary: Get a specific zodiac sign
-    description: >
-      Type in the name of a zodiac sign and I'll fetch its details for you.
-    parameters:
-      - name: name
-        in: path
-        type: string
-        required: true
-        description: The name of the zodiac sign you want info on
-        example: "Leo"
-    responses:
-      200:
-        description: Found the sign you're looking for
-        examples:
-          application/json:
-            name: "Leo"
-            element: "Fire"
-            date_range: "July 23 - August 22"
-      404:
-        description: >
-          Could not find that sign. Either it doesn't exist or you typed it
-          in wrong.
+  Finds Zodiac sign by name.
+  When it is found, it will give the sign name, element, and the date range!
+  If the sign is not found, it will return an error message.
     """
     db = current_app.get_db_connection()
     cursor = db.cursor(dictionary=True)
