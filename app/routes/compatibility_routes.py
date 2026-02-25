@@ -6,37 +6,7 @@ def make_compatibility(app):
     @app.route('/compatibility/<sign1>/<sign2>', methods=['GET'])
     def get_compatibility(sign1, sign2):
         """
-        Check Compatibility Between Two Zodiac Signs
-        ---
-        tags:
-          - Compatibility
-        parameters:
-          - name: sign1
-            in: path
-            type: string
-            required: true
-            description: The first zodiac sign
-          - name: sign2
-            in: path
-            type: string
-            required: true
-            description: The second zodiac sign
-        responses:
-          200:
-            description: Compatibility result for the two signs
-            examples:
-              application/json:
-                {
-                  "sign1": "Aries",
-                  "sign2": "Leo",
-                  "compatibility": "High",
-                  "description": "A fiery and passionate match! Playful, just make sure you don't get burned..."
-                }
-          404:
-            description: One or both signs not recognised
-            examples:
-              application/json:
-                {"error": "The stars don't recognise one of those signs!"}
+        Returns how two zodiac signs match based on their elements.
         """
 
         # Zodiac elements
