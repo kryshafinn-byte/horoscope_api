@@ -1,115 +1,114 @@
 # Horoscope API
 
-This is my fun Horoscope API where users will be able to find out information about their own zodiacs (or someone else's). I have built this project using the four important ones: Python, Flask, Flask‑RESTx, and MySQL.
+A fun little Horoscope API where you can look up zodiac signs, find lucky colours, check compatibility, and even work out someone’s sign from their birthdate. Built with **Python**, **Flask**, **Flask‑RESTx**, and **MySQL**.
 
 ## Project Overview
 
-This Horoscope API brings together Flask, MySQL, and Swagger to create a clean, beginner‑friendly, and actually fun little system. Everything is structured neatly using Blueprints and documented with Swagger UI. The whole thing runs smoothly, returns tidy JSON, and is easy to explore whether you're a developer or just curious about the stars and their stories.
+This API is designed to be clean, beginner‑friendly, and easy to explore. Routes are organised into simple files, everything returns tidy JSON, and Swagger UI makes it smooth to navigate whether you’re a developer or just curious about the stars.
 
 ## My Goal
 
-My goal was first, to be dancing for joy to create something. But also to:
+I wanted to build something joyful while learning how to structure a project professionally, use Git + GitHub properly, and document everything clearly with Swagger — all while keeping the tone friendly and fun.
 
-- Build an API using Flask  
-- Structure a project in a professional and clear way, to get me career‑ready  
-- Use Git + GitHub to keep a good track of my project  
-- Display my API using Flask‑RESTx (Swagger)  
-  - (Anybody else start thinking about the song by Cher Lloyd when they see this, or just me)
+## Features
 
-## The Features
-
-Currently, the API can:
-
-- Return all 12 zodiac signs  
-- Show zodiac details: name, date range, and element (Fire, Earth, Air, Water)  
-- Fetch a specific sign  
+- All 12 zodiac signs  
+- Sign details: name, element, date range  
+- Find a sign by name  
 - Work out a sign from a birthdate  
-- Return lucky colours for each sign (from MySQL)  
-- Check compatibility between two signs using elemental logic  
+- Lucky colours (from MySQL)  
+- Compatibility between two signs  
 
-## Where My Tech At
+## Tech
 
 - Python  
 - Flask  
-- Flask‑RESTx (for Swagger UI)  
+- Flask‑RESTx  
 - MySQL  
-- Git + GitHub
+- Git + GitHub  
 
-## How to Run the Tests
+## Setup, Running, Testing, and Using the API
 
-This project uses **pytest** to make sure all the zodiac code and info is playing nice. To run the tests: 
-1. Activate your virtual environment
-2. In the project folder, run: pytest
+### Setup
+1. Create and activate a virtual environment  
+   - Git Bash: `source venv/Scripts/activate`  
+   - CMD: `venv\Scripts\activate`
+2. Install dependencies:  pip install -r requirements.txt
+3. Set up the database: SOURCE horoscope_setup.sql;
+4. Add your MySQL details to 'config.py'
 
+## Run that App
+    flask run
+Visit: `http://127.0.0.1:5000/`  
+Swagger UI will show all endpoints.
 
-You’ll see the tests zip by, and pytest will let you know if everything is aligned with the stars or if something needs a little cosmic adjustment. All tests live inside the `app/tests` folder, and they cover things like:
+### Run the tests
+    pytest
 
-- Working out the correct zodiac sign  
-- Boundary dates (the “is this Aries or Pisces?” moments)  
-- Invalid dates and friendly error messages  
+### Endpoints
+- `/` — Welcome message  
+- `/signs` — All zodiac signs  
+- `/signs/<name>` — One sign  
+- `/signs/by-date?date=YYYY-MM-DD` — Sign from birthdate  
+- `/lucky-colour/<name>` — Lucky colours  
+- `/compatibility/<sign1>/<sign2>` — Compatibility  
 
-It keeps the project stable, predictable, and beginner‑friendly — just how I like it.
+### Error responses
+- Missing date → `400`  
+- Invalid date → `400`  
+- Unknown sign → `404`  
+- Unknown compatibility sign → `404`  
 
-## This is the structure (but again, so far! Rome was not built in a day!)
+### How the data works
+Two simple MySQL tables:
+- `signs` (name, element, date_range)  
+- `lucky_colours` (sign_name, colour1, colour2, colour3)
 
-    horoscope_api/
-         app/
-            __init__.py
-            routes/
-               signs_routes.py
-               lucky_colour_routes.py
-               compatibility_routes.py
-           models/
-               air_signs.py
-               base_sign.py
-               earth_signs.py
-               fire_signs.py
-               water_signs.py
-    database/
-         horoscope_setup.sql
-    venv/  (not committed, even though I kept accidentally putting things inside it)
-    requirements.txt
-    app.py
-    config.py
-    README.md
+### How the classes work
+- `BaseSign` holds shared attributes  
+- `FireSign`, `EarthSign`, `AirSign`, `WaterSign` inherit from it  
+- Keeps everything clean and avoids repeating code  
 
-## Completed
+---
 
-These are the things I’ve already built and polished:
+## Project Structure
 
-- Added Blueprints and moved routes into their own files  
-- Added a homepage route  
-- Connected MySQL and returned real data  
-- Added lucky colours table and endpoint  
-- Added compatibility logic and endpoint  
-- Added Swagger documentation  
-- Added error handling  
-- Added birthdate → sign logic  
-- Structured routes using Blueprints  
-- Kept testing and refining  
+horoscope_api/
+app/
+routes/
+signs_routes.py
+lucky_colour_routes.py
+compatibility_routes.py
+models/
+base_sign.py
+fire_signs.py
+earth_signs.py
+air_signs.py
+water_signs.py
+utils/
+sign_calculator.py
+database/
+horoscope_setup.sql
+requirements.txt
+app.py
+config.py
+README.md
 
-## Twiddly Bits Yet To Come
+## Done and dusted
 
-These are the last little bits of polish I’ll be adding to finish the API properly:
-
-- Give the code a final tidy and clean‑up  
-- Make naming consistent across files  
-- Add clear docstrings so everything is easy to understand  
-- Finish the README sections:
-  - How to set things up  
-  - How to run the app  
-  - How to run the tests  
-  - A simple list of all endpoints  
-  - What the error messages look like  
-  - A quick look at how the data is organised  
-  - A beginner‑friendly note on how the sign classes relate to each other  
-- Update the project board  
-- Double‑check all endpoints  
-- Run all tests again  
-- Final commit and push  
-
-After that, the API will be fully polished, documented, and ready to hand in.
+- Clean route structure  
+- MySQL connection + real data  
+- Lucky colours endpoint  
+- Compatibility logic  
+- Birthdate → sign logic  
+- Swagger documentation  
+- Error handling  
+- Tests with pytest  
+- Code tidy‑up + docstrings  
+- Updated README  
+- Updated project board  
 
 ## Thank You
 
 I cannot wait for what is next.
+
