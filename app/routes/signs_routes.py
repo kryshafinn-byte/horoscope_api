@@ -25,10 +25,15 @@ def home():
 @signs.route("/signs", methods=["GET"])
 def get_signs():
     """
-    Get every zodiac sign from the database.
-    ---
-    description: Get every zodiac sign from the database.
-    """
+Get every zodiac sign from the database.
+---
+description: Get every zodiac sign from the database.
+parameters: []
+responses:
+  200:
+    description: A list of all zodiac signs.
+"""
+
     db = current_app.get_db_connection()
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT * FROM signs")
