@@ -25,7 +25,10 @@ I wanted to build something joyful while learning how to structure a project pro
 - Flask  
 - Flask‑RESTx  
 - MySQL  
-- Git + GitHub  
+- Git + GitHub
+- pytest
+- Swagger UI  
+- Swagger docstrings for auto‑generated documentation  
 
 ## Setup, Running, Testing, and Using the API
 
@@ -40,15 +43,18 @@ I wanted to build something joyful while learning how to structure a project pro
 ## Run that App
     flask run
 Visit: `http://127.0.0.1:5000/`  
-Swagger UI will show all endpoints.
+Swagger UI will show all endpoints. You can find Swagger UI at `/apidocs` which has every endpoint with descriptions.  
+All routes include short, friendly docstrings so Swagger can generate clean documentation.
 
 ### Run the tests
     pytest
 
+The test suite focuses on the SignCalculator, covering mid‑range dates, boundary dates, and invalid inputs.
+
 ### Endpoints
 - `/` — Welcome message  
 - `/signs` — All zodiac signs  
-- `/signs/<name>` — One sign  
+- `/signs/<name>` — One sign
 - `/signs/by-date?date=YYYY-MM-DD` — Sign from birthdate  
 - `/lucky-colour/<name>` — Lucky colours  
 - `/compatibility/<sign1>/<sign2>` — Compatibility  
@@ -63,6 +69,7 @@ Swagger UI will show all endpoints.
 Two simple MySQL tables:
 - `signs` (name, element, date_range)  
 - `lucky_colours` (sign_name, colour1, colour2, colour3)
+- `compatibility` (sign_name, compatible_with)
 
 ### How the classes work
 - `BaseSign` holds shared attributes  
@@ -112,4 +119,3 @@ Two simple MySQL tables:
 ## Thank You
 
 I cannot wait for what is next.
-
