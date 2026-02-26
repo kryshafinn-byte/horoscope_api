@@ -1,6 +1,9 @@
 from app.models.base_sign import BaseSign
 class FireSign(BaseSign):
-    """Fire signs: Aries, Leo, Sagittarius
-    This is here to show what zodiac sign classes look like and will take on
-    the shared properties of the BaseSign, but keeping it Fire-specific!"""
+    """
+    Fire signs (Aries, Leo, Sagittarius) go in this one.
+    They use all the shared BaseSign parts, but also keep their own fiery bits and bobs.
+    Fire signs are usually loud, loyal and maybe a bit stubborn, but they have big hearts!
+    I am an Aries :)
+    """
     element = "Fire"

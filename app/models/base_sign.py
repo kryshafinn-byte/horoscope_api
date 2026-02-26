@@ -1,7 +1,8 @@
 class BaseSign:
-    """Base class for all zodiac signs
-    It stores the name, the date range, and the element of the sign.
-    It also puts it into a JSON format for the API to use.
+    """
+    The base class for every zodiac sign.
+    It holds the name, the date range, and the element.
+    I have this so that I don't need to keep on writing code for all 12 signs and it can just be nice and simple.
     """
     def __init__(self, name, date_range, element):
         self.name = name
@@ -14,4 +15,3 @@ class BaseSign:
             "date_range": self.date_range,
             "element": self.element
         }
-

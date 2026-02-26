@@ -1,67 +1,69 @@
 from app.utils.sign_calculator import SignCalculator
 import pytest
-
-# Mid-range dates for each sign (all 1999) to make sure the basics are working! 
-
-def test_aries_mid():
-    assert SignCalculator.from_string("1999-04-05") == "Aries"
-
-def test_taurus_mid():
-    assert SignCalculator.from_string("1999-05-10") == "Taurus"
-
-def test_gemini_mid():
-    assert SignCalculator.from_string("1999-06-10") == "Gemini"
-
-def test_cancer_mid():
-    assert SignCalculator.from_string("1999-07-10") == "Cancer"
-
-def test_leo_mid():
-    assert SignCalculator.from_string("1999-08-10") == "Leo"
-
-def test_virgo_mid():
-    assert SignCalculator.from_string("1999-09-10") == "Virgo"
-
-def test_libra_mid():
-    assert SignCalculator.from_string("1999-10-10") == "Libra"
-
-def test_scorpio_mid():
-    assert SignCalculator.from_string("1999-11-10") == "Scorpio"
-
-def test_sagittarius_mid():
-    assert SignCalculator.from_string("1999-12-10") == "Sagittarius"
-
-def test_capricorn_mid():
-    assert SignCalculator.from_string("1999-01-10") == "Capricorn"
-
-def test_aquarius_mid():
-    assert SignCalculator.from_string("1999-02-10") == "Aquarius"
-
-def test_pisces_mid():
-    assert SignCalculator.from_string("1999-03-10") == "Pisces"
-
-
-# Boundary tests (all 1999 except Capricorn ends due to how it falls)
-def test_aries_start():
-    assert SignCalculator.from_string("1999-03-21") == "Aries"
-
-def test_aries_end():
-    assert SignCalculator.from_string("1999-04-19") == "Aries"
-
-def test_capricorn_start():
-    assert SignCalculator.from_string("1999-12-22") == "Capricorn"
-
-def test_capricorn_end():
-    assert SignCalculator.from_string("1999-01-19") == "Capricorn"
-
-#Invalid inputs/dates not in the calendar or lack of info
-def test_invalid_format():
+# WRONG INPUTS
+def test_put_in_wrong():
     with pytest.raises(ValueError):
         SignCalculator.from_string("1999/12/25")
-
-def test_impossible_date():
+def test_date_is_wrong():
+    # feb 30th wont be a date
     with pytest.raises(ValueError):
         SignCalculator.from_string("1999-02-30")
-
-def test_empty_string():
+def test_empty_thing():
+    # nothing in here so nothing will work
     with pytest.raises(ValueError):
         SignCalculator.from_string("")
+
+
+# CUSPS or THE END
+#do you believe in cusps?
+def test_aries_start_cusp():
+    print("checking Aries start cusp...")
+    assert SignCalculator.from_string("1999-03-21") == "Aries"
+def test_aries_end_cusp():
+    print("checking Aries end cusp...")
+    assert SignCalculator.from_string("1989-04-19") == "Aries"
+def test_capricorn_start_cusp():
+    print("checking Capricorn start cusp...")
+    assert SignCalculator.from_string("1959-12-22") == "Capricorn"
+def test_capricorn_end_cusp():
+    print("checking Capricorn end cusp...")
+    assert SignCalculator.from_string("1949-01-19") == "Capricorn"
+
+
+# MID DATES
+def test_aries_is_mid():
+    print("mid Aries check")
+    assert SignCalculator.from_string("1989-04-05") == "Aries"
+def test_taurus_is_mid():
+    print("mid Taurus check")
+    assert SignCalculator.from_string("1979-05-10") == "Taurus"
+def test_gemini_is_mid():
+    print("mid Gemini check")
+    assert SignCalculator.from_string("1909-06-10") == "Gemini"
+def test_cancer_is_mid():
+    print("mid Cancer check")
+    assert SignCalculator.from_string("1919-07-10") == "Cancer"
+def test_leo_is_mid():
+    print("mid Leo check")
+    assert SignCalculator.from_string("1929-08-10") == "Leo"
+def test_virgo_is_mid():
+    print("mid Virgo check")
+    assert SignCalculator.from_string("1939-09-10") == "Virgo"
+def test_libra_is_mid():
+    print("mid Libra check")
+    assert SignCalculator.from_string("1949-10-10") == "Libra"
+def test_scorpio_is_mid():
+    print("mid Scorpio check")
+    assert SignCalculator.from_string("1959-11-10") == "Scorpio"
+def test_sagittarius_is_mid():
+    print("mid Sagittarius check")
+    assert SignCalculator.from_string("1969-12-10") == "Sagittarius"
+def test_capricorn_is_mid():
+    print("mid Capricorn check")
+    assert SignCalculator.from_string("1989-01-10") == "Capricorn"
+def test_aquarius_is_mid():
+    print("mid Aquarius check")
+    assert SignCalculator.from_string("1999-02-10") == "Aquarius"
+def test_pisces_is_mid():
+    print("mid Pisces check")
+    assert SignCalculator.from_string("1979-03-10") == "Pisces"

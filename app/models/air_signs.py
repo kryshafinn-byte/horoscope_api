@@ -1,6 +1,9 @@
 from app.models.base_sign import BaseSign
 class AirSign(BaseSign):
-    """Air signs: Gemini, Libra, Aquarius
-    This is here to show what zodiac sign classes look like and will take on
-    the shared properties of the BaseSign, but keeping it Air-specific!"""
-    element = "Air"
+    """
+    Air signs (Gemini, Libra, Aquarius) are in here. Maybe floating?
+    They get their basics from the Basesign but keep the air qualities too which we want, so we can see the difference between all signs
+    Air signs are chatty but also chaotic. Never think they are airheads though.
+    Can be crazy over thinkers however! :/
+    """
+element = "Air"
