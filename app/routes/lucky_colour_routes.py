@@ -1,3 +1,9 @@
+print("LOADED: lucky_colour_routes.py")
+
+"""
+Routes for the Horoscope API.
+"""
+
 from flask import jsonify
 
 def make_lucky_colours(app):
@@ -6,17 +12,20 @@ def make_lucky_colours(app):
     @app.route('/lucky-colour/<name>', methods=['GET'])
     def get_lucky_colours(name):
         """
-        Returns the lucky colours for a zodiac sign.
+        Get the lucky colours for a zodiac sign.
+        ---
+        description: Get the lucky colours for a zodiac sign.
         """
 
         db = app.get_db_connection()
         cursor = db.cursor(dictionary=True)
 
         query = """
-            SELECT colour1, colour2, colour3
-            FROM lucky_colours
-            WHERE LOWER(sign_name) = LOWER(%s)
+        SELECT colour1, colour2, colour3
+        FROM lucky_colours
+        WHERE LOWER(sign_name) = LOWER(%s)
         """
+
         cursor.execute(query, (name,))
         result = cursor.fetchone()
 

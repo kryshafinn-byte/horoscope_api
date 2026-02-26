@@ -1,3 +1,7 @@
+print("LOADED: signs_routes.py")
+"""
+Routes for the Horoscope API.
+"""
 from flask import Blueprint, jsonify, current_app, request
 from app.models.fire_signs import FireSign
 from app.models.earth_signs import EarthSign
@@ -11,7 +15,9 @@ signs = Blueprint("signs", __name__)
 @signs.route("/", methods=["GET"])
 def home():
     """
-    A little hello from the Horoscope API like a "homepage".
+    A little homepage welcome from the Horoscope API.
+    ---
+    description: A little homepage welcome from the Horoscope API.
     """
     return jsonify({"message": "Welcome to my Horoscopes API"})
 
@@ -19,7 +25,9 @@ def home():
 @signs.route("/signs", methods=["GET"])
 def get_signs():
     """
-    Gives you every zodiac sign from the database.
+    Get every zodiac sign from the database.
+    ---
+    description: Get every zodiac sign from the database.
     """
     db = current_app.get_db_connection()
     cursor = db.cursor(dictionary=True)
@@ -49,11 +57,12 @@ def get_signs():
 
     return jsonify(signs_list), 200
 
-
 @signs.route("/signs/by-date", methods=["GET"])
 def get_sign_by_date():
     """
-    Works out your zodiac sign from your birthdate.
+    Work out your zodiac sign from your birthdate.
+    ---
+    description: Work out your zodiac sign from your birthdate.
     """
     date_str = request.args.get("date")
 
@@ -67,11 +76,12 @@ def get_sign_by_date():
 
     return jsonify({"sign": sign}), 200
 
-
 @signs.route('/signs/<name>', methods=['GET'])
 def get_the_sign_name(name):
     """
-    Finds a zodiac sign by name and shows the details.
+    Find a zodiac sign by name.
+    ---
+    description: Find a zodiac sign by name.
     """
     db = current_app.get_db_connection()
     cursor = db.cursor(dictionary=True)
