@@ -20,22 +20,26 @@ def make_app():
     """
     print("Starting up the horoscope API...")
 
-    # create the app
     app = Flask(__name__)
 
-    # add swagger docs
-    Swagger(app)
+    # Swagger setup
+    swagger_config = {
+        "title": "Horoscope API",
+        "uiversion": 3,
+        "description": "A friendly little API for zodiac signs, lucky colours, and compatibility.",
+    }
+    Swagger(app, config=swagger_config)
 
-    # gets the database connection
+    # database connection helper
     def get_db_connection():
+        """
+        Creates a MySQL connection using the settings in config.py.
+        Returns a live connection or None if something goes wrong.
+        """
         print("Preparing database connection...")
 
         settings = DB_CONFIG.copy()
-        if "host" not in settings:
-            print("Warning: host is missing from DB config.")
-        else:
-            if settings.get("user") is None:
-                print("Warning: user is missing from DB config.")
+
         try:
             conn = mysql.connector.connect(**settings)
             print("Database connection successful.")
@@ -44,10 +48,9 @@ def make_app():
             print("Database connection failed:", e)
             return None
 
-    # attaches the helper to the app
     app.get_db_connection = get_db_connection
 
-    # register the routes
+    # register routes
     print("Registering routes...")
     app.register_blueprint(signs)
     make_lucky_colours(app)

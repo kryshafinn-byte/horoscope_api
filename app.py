@@ -1,5 +1,4 @@
 from app import make_app
-from app.routes.lucky_colour_routes import make_lucky_colours
 
 app = make_app()
 
