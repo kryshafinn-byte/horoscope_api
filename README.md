@@ -8,7 +8,7 @@ This API is designed to be clean, beginner‑friendly, and easy to explore. Rout
 
 ## My Goal
 
-I wanted to build something joyful while learning how to structure a project professionally, use Git + GitHub properly, and document everything clearly with Swagger — all while keeping the tone friendly and fun.
+I wanted to build something joyful while learning how to structure a project professionally, use Git + GitHub properly, and document everything clearly with Swagger!
 
 ## Features
 
@@ -73,26 +73,27 @@ Two simple MySQL tables:
 
 ## Project Structure
 
-horoscope_api/
-app/
-routes/
-signs_routes.py
-lucky_colour_routes.py
-compatibility_routes.py
-models/
-base_sign.py
-fire_signs.py
-earth_signs.py
-air_signs.py
-water_signs.py
-utils/
-sign_calculator.py
-database/
-horoscope_setup.sql
-requirements.txt
-app.py
-config.py
-README.md
+      horoscope_api/
+         app/
+            routes/
+               signs_routes.py
+               lucky_colour_routes.py
+               compatibility_routes.py
+            models/
+               base_sign.py
+               fire_signs.py
+               earth_signs.py
+               air_signs.py
+               water_signs.py
+            utils/
+               sign_calculator.py
+         database/
+            horoscope_setup.sql
+         requirements.txt
+         app.py
+         pytest.ini
+         config.py
+         README.md
 
 ## Done and dusted
 
