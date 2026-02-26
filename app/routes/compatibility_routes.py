@@ -12,10 +12,22 @@ def make_compatibility(app):
     @app.route('/compatibility/<sign1>/<sign2>', methods=['GET'])
     def get_compatibility(sign1, sign2):
         """
-        Check if two zodiac signs are a match.
-        ---
-        description: Check if two zodiac signs are a match.
-        """
+Check if two zodiac signs are a match.
+---
+description: Check if two zodiac signs are a match.
+parameters:
+  - name: sign1
+    in: path
+    type: string
+    required: true
+    description: The first zodiac sign.
+  - name: sign2
+    in: path
+    type: string
+    required: true
+    description: The second zodiac sign.
+"""
+
 
         elements = {
             "aries": "fire", "leo": "fire", "sagittarius": "fire",

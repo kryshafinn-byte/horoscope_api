@@ -60,10 +60,17 @@ def get_signs():
 @signs.route("/signs/by-date", methods=["GET"])
 def get_sign_by_date():
     """
-    Work out your zodiac sign from your birthdate.
-    ---
-    description: Work out your zodiac sign from your birthdate.
-    """
+Work out your zodiac sign from your birthdate.
+---
+description: Work out your zodiac sign from your birthdate.
+parameters:
+  - name: date
+    in: query
+    type: string
+    required: true
+    description: A date in YYYY-MM-DD format.
+"""
+
     date_str = request.args.get("date")
 
     if not date_str:
@@ -79,10 +86,17 @@ def get_sign_by_date():
 @signs.route('/signs/<name>', methods=['GET'])
 def get_the_sign_name(name):
     """
-    Find a zodiac sign by name.
-    ---
-    description: Find a zodiac sign by name.
-    """
+Find a zodiac sign by name.
+---
+description: Find a zodiac sign by name.
+parameters:
+  - name: name
+    in: path
+    type: string
+    required: true
+    description: The zodiac sign name.
+"""
+
     db = current_app.get_db_connection()
     cursor = db.cursor(dictionary=True)
     query = "SELECT * FROM signs WHERE LOWER(name) = LOWER(%s)"

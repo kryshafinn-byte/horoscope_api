@@ -12,10 +12,17 @@ def make_lucky_colours(app):
     @app.route('/lucky-colour/<name>', methods=['GET'])
     def get_lucky_colours(name):
         """
-        Get the lucky colours for a zodiac sign.
-        ---
-        description: Get the lucky colours for a zodiac sign.
-        """
+Get the lucky colours for a zodiac sign.
+---
+description: Get the lucky colours for a zodiac sign.
+parameters:
+  - name: name
+    in: path
+    type: string
+    required: true
+    description: The zodiac sign name.
+"""
+
 
         db = app.get_db_connection()
         cursor = db.cursor(dictionary=True)
