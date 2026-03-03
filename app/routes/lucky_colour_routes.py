@@ -1,11 +1,3 @@
-print("LOADED: lucky_colour_routes.py")
-
-"""
-Routes for the Horoscope API.
-"""
-
-from flask import jsonify
-
 def make_lucky_colours(app):
     print("Lucky colour routes loaded!")
 
@@ -21,15 +13,20 @@ def make_lucky_colours(app):
             type: string
             required: true
             description: The zodiac sign name.
+        responses:
+          200:
+            description: Lucky colours returned.
+          404:
+            description: Sign not found.
         """
 
         db = app.get_db_connection()
         cursor = db.cursor(dictionary=True)
 
         query = """
-        SELECT colour1, colour2, colour3
-        FROM lucky_colours
-        WHERE LOWER(sign_name) = LOWER(%s)
+            SELECT colour1, colour2, colour3
+            FROM lucky_colours
+            WHERE LOWER(sign_name) = LOWER(%s)
         """
 
         cursor.execute(query, (name,))
