@@ -1,3 +1,10 @@
+print("LOADED: lucky_colour_routes.py")
+
+"""
+Routes for the Horoscope API.
+"""
+from flask import jsonify
+
 def make_lucky_colours(app):
     print("Lucky colour routes loaded!")
 
