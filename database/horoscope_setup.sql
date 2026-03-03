@@ -21,7 +21,7 @@ CREATE TABLE compatibility (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sign_name VARCHAR(50) NOT NULL,
     compatible_with VARCHAR(50) NOT NULL
-);
+    );
 
 INSERT INTO signs (name, date_range, element) VALUES
 ('Aries', 'March 21 - April 19', 'Fire'),
